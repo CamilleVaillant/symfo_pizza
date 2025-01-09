@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PIZZA{% endblock %}
+
+{% block body %}
+    <h1>Pizza-form</h1>
+    {{form_start(pizzaform)}}
+        {{form_widget(pizzaform)}}
+        <button>envoyer</button>
+    {{form_end(pizzaform)}}
+{% endblock %}

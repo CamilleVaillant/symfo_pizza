@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}list pizza{% endblock %}
+
+{% block body %}
+    {% for pizza in pizzas %}
+        <h1> {{ pizza.name}}</h1>
+        <h2> {{ pizza.sacretingredient}}</h2>
+    {% endfor %}
+{% endblock %}
