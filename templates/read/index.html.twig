@@ -3,11 +3,14 @@
 {% block title %}list pizza{% endblock %}
 
 {% block body %}
+{{dump(pizzas)}}
     {% for pizza in pizzas %}
         <h1> {{ pizza.name}}</h1>
         <h2> {{ pizza.sacretingredient}}</h2>
-        <h3>{{ pizza.patte.type}}</h3>
-        {# <h4>{{ pizza.ingredients}}</h4> #}
+        <h3> {{ pizza.patte.type}}</h3>
+        {% for ingredients in ingredients %}
+            <h4> {{ ingredients.pizzas.ingredients}}</h4>
+        {% endfor %}
         
         <a href= {{path('app_update',{'id' : pizza.id})}}>Modifier</a>
         <form method="POST" onsubmit="return confirm('Confirmer la suppression?')" action="{{path('app_delete', {'id': pizza.id}) }}">

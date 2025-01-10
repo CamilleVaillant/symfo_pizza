@@ -21,13 +21,15 @@ class Ingredients
     /**
      * @var Collection<int, Pizza>
      */
-    #[ORM\ManyToMany(targetEntity: Pizza::class, inversedBy: 'ingredients')]
-    private Collection $relation;
+    #[ORM\ManyToMany(targetEntity: Pizza::class, mappedBy: 'Ingredients')]
+    private Collection $pizzas;
 
     public function __construct()
     {
-        $this->relation = new ArrayCollection();
+        $this->pizzas = new ArrayCollection();
     }
+
+    
 
     public function getId(): ?int
     {
@@ -49,24 +51,29 @@ class Ingredients
     /**
      * @return Collection<int, Pizza>
      */
-    public function getRelation(): Collection
+    public function getPizzas(): Collection
     {
-        return $this->relation;
+        return $this->pizzas;
     }
 
-    public function addRelation(Pizza $relation): static
+    public function addPizza(Pizza $pizza): static
     {
-        if (!$this->relation->contains($relation)) {
-            $this->relation->add($relation);
+        if (!$this->pizzas->contains($pizza)) {
+            $this->pizzas->add($pizza);
+            $pizza->addIngredient($this);
         }
 
         return $this;
     }
 
-    public function removeRelation(Pizza $relation): static
+    public function removePizza(Pizza $pizza): static
     {
-        $this->relation->removeElement($relation);
+        if ($this->pizzas->removeElement($pizza)) {
+            $pizza->removeIngredient($this);
+        }
 
         return $this;
     }
+
+   
 }
