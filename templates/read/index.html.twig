@@ -3,13 +3,13 @@
 {% block title %}list pizza{% endblock %}
 
 {% block body %}
-{{dump(pizzas)}}
     {% for pizza in pizzas %}
         <h1> {{ pizza.name}}</h1>
         <h2> {{ pizza.sacretingredient}}</h2>
         <h3> {{ pizza.patte.type}}</h3>
-        {% for ingredients in ingredients %}
-            <h4> {{ ingredients.pizzas.ingredients}}</h4>
+        <h4> {{ pizza.imagename}}</h4>
+        {% for ingredient in pizza.ingredients %}
+            <h4> {{ ingredient.name}}</h4>
         {% endfor %}
         
         <a href= {{path('app_update',{'id' : pizza.id})}}>Modifier</a>

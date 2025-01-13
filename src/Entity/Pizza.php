@@ -2,10 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\PizzaRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PizzaRepository;
+use Doctrine\Common\Collections\Collection;
+//lien pour les images
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+
 
 #[ORM\Entity(repositoryClass: PizzaRepository::class)]
 class Pizza
@@ -21,6 +27,16 @@ class Pizza
     #[ORM\Column(length: 255)]
     private ?string $sacret_ingredient = null;
 
+    //rajout d'attribut en private
+    #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?string $imageName = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?DateTimeImmutable $updatedAt = null;
+
     #[ORM\ManyToOne(inversedBy: 'relation')]
     private ?Patte $patte = null;
 
@@ -29,6 +45,7 @@ class Pizza
      */
     #[ORM\ManyToMany(targetEntity: Ingredients::class, inversedBy: 'pizzas')]
     private Collection $Ingredients;
+
 
     public function __construct()
     {
@@ -102,5 +119,31 @@ class Pizza
         return $this;
     }
 
-   
+    //rajout get et set pour images
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if($imageFile) {
+            // si un fichier est chargé, met à jour la date
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
 }
