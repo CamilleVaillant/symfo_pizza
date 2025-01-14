@@ -7,7 +7,7 @@
         <h1> {{ pizza.name}}</h1>
         <h2> {{ pizza.sacretingredient}}</h2>
         <h3> {{ pizza.patte.type}}</h3>
-        <h4> {{ pizza.imagename}}</h4>
+        <img src={{asset('images/' ~ pizza.imageName)}} alt="image de pizza"> 
         {% for ingredient in pizza.ingredients %}
             <h4> {{ ingredient.name}}</h4>
         {% endfor %}

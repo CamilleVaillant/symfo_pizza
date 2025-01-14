@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
-
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: PizzaRepository::class)]
 class Pizza
 {

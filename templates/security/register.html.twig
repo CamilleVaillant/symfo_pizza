@@ -1,0 +1,27 @@
+{% block nav %}
+            <nav>
+                <ul>
+                    <li><a href={{ path("app_read")}}>Accueuil</a></li>
+                    <li><a href={{ path("app_home")}}>Creation</a></li>
+                    <li><a href={{ path("app_login")}}>Se connecter</a></li>
+                    <li><a href={{ path("app_register")}}>S'inscrire</a></li>
+                    
+                    
+                </ul>
+            </nav>
+        {% endblock %}
+
+
+
+{% block body %}
+ <h2>S'inscrire</h2>
+    {{form_start(inscription)}}
+        {{form_widget(inscription)}}
+        <button>envoyer</button>
+    {{form_end(inscription)}}
+    {% for message in app.flashes('error') %}
+            <diva class="alert alert-success">
+            {{ message }}
+            </div>
+        {% endfor %}
+{% endblock %}

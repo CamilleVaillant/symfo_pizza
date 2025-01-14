@@ -26,7 +26,7 @@ class HomeController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $pizza =new Pizza();
-
+        
         $form = $this->createForm(PizzaType::class, $pizza);
 
         $form->handleRequest($request);
@@ -42,6 +42,9 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'pizzaform' => $form->createView(),
+            
         ]);
     }
+
+   
 }
