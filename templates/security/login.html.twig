@@ -9,10 +9,10 @@
         {% endif %} #}
 
         {% if app.user %}
-            {# <div class="mb-3">
+             <div class="mb-3">
                 You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div> #}
-        {# {% endif %} 
+            </div>
+        {% endif %} 
         {% if is_granted('ROLE_ADMIN') %}
             <li><a href={{ path('app_delete')}}>suprimer</a></li>
         {% endif %}
